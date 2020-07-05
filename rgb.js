@@ -1,5 +1,6 @@
 //Adding Comment to test Git
 //Adding second Comment
+//Last comment to test Git
 
 var http = require('http').createServer(handler); //require http server, and create server with function handler()
 var fs = require('fs'); //require filesystem module
