@@ -1,3 +1,5 @@
+//Adding Comment to test Git
+
 var http = require('http').createServer(handler); //require http server, and create server with function handler()
 var fs = require('fs'); //require filesystem module
 var io = require('socket.io')(http) //require socket.io module and pass the http object (server)
@@ -24,7 +26,7 @@ function fadeRed (newRed){
 	var speed = (fadeTime / Math.abs(redRGB - newRed))
 	if (redTimeout){
 		redTimeout = clearTimeout(redTimeout);
-	}	
+	}
 	redTimeout = setTimeout(
 		function (){
 			if (redRGB < newRed){
@@ -46,7 +48,7 @@ function fadeGreen (newGreen){
 	var speed = (fadeTime / Math.abs(greenRGB - newGreen))
 	if (greenTimeout){
 		greenTimeout = clearTimeout(greenTimeout);
-	}	
+	}
 	greenTimeout = setTimeout(
 		function (){
 			if (greenRGB < newGreen){
@@ -68,7 +70,7 @@ function fadeBlue (newBlue){
 	var speed = (fadeTime / Math.abs(blueRGB - newBlue))
 	if (blueTimeout){
 		blueTimeout = clearTimeout(blueTimeout);
-	}	
+	}
 	blueTimeout = setTimeout(
 		function (){
 			if (blueRGB < newBlue){
