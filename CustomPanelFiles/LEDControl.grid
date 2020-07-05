@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><abs contexttype="opengear" id="_top" objectid="New CustomPanel.xml">
+   <meta>
+      <ogscript/>
+      <ogscript>
+
+
+/*! block id=1003,1002 !*/
+params.setValue('color', 0, params.getValue('colorPicker', 0));
+/*!!
+ &lt;block id="1003" type="param_setvalue" x="329" y="104" w="318" PARAM="[root, Device (Frame slot 1), Not In Menu, Color (color)]" VALUE="ID:1002" /&gt;
+&lt;block id="1002" type="param__top&amp;amp;ColorPicker (colorPicker)[0]" x="21" y="106" w="243" SET="" /&gt;
+!!*/
+/*!!&lt;checksum&gt;095e19c5828e88cb76af7e2aad6f66f2&lt;/checksum&gt;!!*/</ogscript>
+      <ogscript/>
+      <style/>
+      <api>var group1Enabled = false;</api>
+   </meta>
+   <param expand="true" height="138" left="122" oid="colorPicker" showlabel="false" top="260" width="357">
+      <task tasktype="ogscript"/>
+      <task tasktype="ogscript">function hexToRgb(hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    red: parseInt(result[1], 16),
+    green: parseInt(result[2], 16),
+    blue: parseInt(result[3], 16)
+  } : null;
+}
+
+ogscript.debug(JSON.stringify(hexToRgb(params.getValue('colorPicker', 0)))); // "51";
+
+
+/*! block id=1012,1011 !*/
+if (group1Enabled){
+ogscript.asyncPost("http://192.168.86.21:8080",JSON.stringify(hexToRgb(params.getValue('colorPicker', 0))), null);
+}
+/*!!
+ &lt;block id="1012" type="ogscript_httppost" x="474" y="177" w="318" URL="192.168.86.21" DATA="ID:1011" CALLBACK="null" /&gt;
+&lt;block id="1011" type="param__top&amp;amp;ColorPicker (colorPicker)[0]" x="147" y="186" w="243" SET="" /&gt;
+!!*/
+/*!!&lt;checksum&gt;b886f33531c3db65332ac72c635a2c91&lt;/checksum&gt;!!*/</task>
+      <task tasktype="ogscript">if (group1Enabled){
+   ogscript.setStyle("group1", params.getValue('colorPicker', 0));
+}</task>
+   </param>
+   <button buttontype="push" height="88" id="red" left="121" name="Red" style="bg#red;" top="424" width="102">
+      <task tasktype="ogscript">/*! block id=1013 !*/
+params.setValue('colorPicker', 0, "#FF0000");
+/*!!
+ &lt;block id="1013" type="param_setvalue" x="547" y="154" w="318" PARAM="[root, Device (Frame slot 1), Not In Menu, ColorPicker (colorPicker)]" VALUE="#FF0000" /&gt;
+!!*/
+/*!!&lt;checksum&gt;8c518ece98a02b8026bd800b30e61002&lt;/checksum&gt;!!*/</task>
+   </button>
+   <button buttontype="push" height="88" id="green" left="251" name="Green" style="bg#green;" top="425" width="102">
+      <task tasktype="ogscript">
+
+
+/*! block id=1013 !*/
+params.setValue('colorPicker', 0, "#00FF00");
+/*!!
+ &lt;block id="1013" type="param_setvalue" x="547" y="154" w="318" PARAM="[root, Device (Frame slot 1), Not In Menu, ColorPicker (colorPicker)]" VALUE="#00FF00" /&gt;
+!!*/
+/*!!&lt;checksum&gt;e77f073a5fc456cb52dae6cd49f69c69&lt;/checksum&gt;!!*/</task>
+   </button>
+   <button buttontype="push" height="88" id="blue" left="381" name="Blue" style="bg#blue;" top="425" width="102">
+      <task tasktype="ogscript">/*! block id=1013 !*/
+params.setValue('colorPicker', 0, "#0000FF");
+/*!!
+ &lt;block id="1013" type="param_setvalue" x="547" y="154" w="318" PARAM="[root, Device (Frame slot 1), Not In Menu, ColorPicker (colorPicker)]" VALUE="#0000FF" /&gt;
+!!*/
+/*!!&lt;checksum&gt;4e5ff735680cfd7c0d43f1cabcc91a44&lt;/checksum&gt;!!*/</task>
+   </button>
+   <button buttontype="toggle" height="92" id="group1" left="578" name="Group 1" style="t:bdr:thick;t:bdr#FFFFFF;f:bdr:none;" top="302" width="112">
+      <task tasktype="ogscript">group1Enabled = !group1Enabled;
+
+ogscript.debug(group1Enabled);</task>
+   </button>
+</abs>
