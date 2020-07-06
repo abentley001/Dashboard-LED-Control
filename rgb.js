@@ -18,80 +18,83 @@ http.listen(8080); //listen to port 8080
 
 var fadeTime = 500;
 
-var redTimeout;
+//var redTimeout;
 
 function fadeRed (newRed){
-	var speed = (fadeTime / Math.abs(redRGB - newRed))
-	if (redTimeout){
-		redTimeout = clearTimeout(redTimeout);
-	}
-	redTimeout = setTimeout(
-		function (){
-			if (redRGB < newRed){
-				redRGB++;
-				fadeRed(newRed);
-			}
-			if (redRGB > newRed){
-				redRGB--;
-				fadeRed(newRed);
-			}
-		console.log(redRGB);
- 		ledRed.pwmWrite(redRGB);
-	}, speed)
+
+	// var speed = (fadeTime / Math.abs(redRGB - newRed))
+	// if (redTimeout){
+	// 	redTimeout = clearTimeout(redTimeout);
+	// }
+	// redTimeout = setTimeout(
+	// 	function (){
+	// 		if (redRGB < newRed){
+	// 			redRGB++;
+	// 			fadeRed(newRed);
+	// 		}
+	// 		if (redRGB > newRed){
+	// 			redRGB--;
+	// 			fadeRed(newRed);
+	// 		}
+	// 	console.log(redRGB);
+ 	// 	ledRed.pwmWrite(redRGB);
+	// }, speed)
 }
 
-var greenTimeout;
+//var greenTimeout;
 
 function fadeGreen (newGreen){
-	var speed = (fadeTime / Math.abs(greenRGB - newGreen))
-	if (greenTimeout){
-		greenTimeout = clearTimeout(greenTimeout);
-	}
-	greenTimeout = setTimeout(
-		function (){
-			if (greenRGB < newGreen){
-				greenRGB++;
-				fadeGreen(newGreen);
-			}
-			if (greenRGB > newGreen){
-				greenRGB--;
-				fadeGreen(newGreen);
-			}
-		console.log(greenRGB);
- 		ledGreen.pwmWrite(greenRGB);
-	}, speed)
+
+	// var speed = (fadeTime / Math.abs(greenRGB - newGreen))
+	// if (greenTimeout){
+	// 	greenTimeout = clearTimeout(greenTimeout);
+	// }
+	// greenTimeout = setTimeout(
+	// 	function (){
+	// 		if (greenRGB < newGreen){
+	// 			greenRGB++;
+	// 			fadeGreen(newGreen);
+	// 		}
+	// 		if (greenRGB > newGreen){
+	// 			greenRGB--;
+	// 			fadeGreen(newGreen);
+	// 		}
+	// 	console.log(greenRGB);
+ 	// 	ledGreen.pwmWrite(greenRGB);
+	// }, speed)
 }
 
-var blueTimeout;
+//var blueTimeout;
 
 function fadeBlue (newBlue){
-	var speed = (fadeTime / Math.abs(blueRGB - newBlue))
-	if (blueTimeout){
-		blueTimeout = clearTimeout(blueTimeout);
-	}
-	blueTimeout = setTimeout(
-		function (){
-			if (blueRGB < newBlue){
-				blueRGB++;
-				fadeBlue(newBlue);
-			}
-			if (blueRGB > newBlue){
-				blueRGB--;
-				fadeBlue(newBlue);
-			}
-		console.log(blueRGB);
- 		ledBlue.pwmWrite(blueRGB);
-	}, speed)
+
+	// var speed = (fadeTime / Math.abs(blueRGB - newBlue))
+	// if (blueTimeout){
+	// 	blueTimeout = clearTimeout(blueTimeout);
+	// }
+	// blueTimeout = setTimeout(
+	// 	function (){
+	// 		if (blueRGB < newBlue){
+	// 			blueRGB++;
+	// 			fadeBlue(newBlue);
+	// 		}
+	// 		if (blueRGB > newBlue){
+	// 			blueRGB--;
+	// 			fadeBlue(newBlue);
+	// 		}
+	// 	console.log(blueRGB);
+ 	// 	ledBlue.pwmWrite(blueRGB);
+	// }, speed)
 }
 function handler (req, res) { //what to do on requests to port 8080
     //console.log('handler', req.body);
     req.on('data', function (data) {
         console.log('request data', data.toString())
 	var color = JSON.parse(data.toString());
-	fadeRed(parseInt(color.red));
-	fadeGreen(parseInt(color.green));
-	fadeBlue(parseInt(color.blue));
-        //set RED LED to specified value
+	//fadeRed(parseInt(color.red));
+	//fadeGreen(parseInt(color.green));
+	//fadeBlue(parseInt(color.blue));
+        ledGreen.pwmWrite(greenRGB); //set RED LED to specified value
         ledGreen.pwmWrite(greenRGB); //set GREEN LED to specified value
         ledBlue.pwmWrite(blueRGB); //set BLUE LED to specified value
     })
