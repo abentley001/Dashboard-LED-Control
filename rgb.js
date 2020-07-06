@@ -94,9 +94,9 @@ function handler (req, res) { //what to do on requests to port 8080
 	//fadeRed(parseInt(color.red));
 	//fadeGreen(parseInt(color.green));
 	//fadeBlue(parseInt(color.blue));
-        ledGreen.pwmWrite(greenRGB); //set RED LED to specified value
-        ledGreen.pwmWrite(greenRGB); //set GREEN LED to specified value
-        ledBlue.pwmWrite(blueRGB); //set BLUE LED to specified value
+        ledRed.pwmWrite((parseInt(color.red))); //set RED LED to specified value
+        ledGreen.pwmWrite((parseInt(color.green))); //set GREEN LED to specified value
+        ledBlue.pwmWrite((parseInt(color.blue))); //set BLUE LED to specified value
     })
     fs.readFile(__dirname + '/public/rgb.html', function(err, data) { //read file rgb.html in public folder
     if (err) {
