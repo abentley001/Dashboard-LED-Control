@@ -1,0 +1,15 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<card autosave="true" online="true" slot="1"
+     sourceframe="file-collection-frame&lt;br>1593792025651"
+     sourceframename="Frame"
+     sourceid="file:/Users/abentley/Documents/Programming/01_Projects/Dashboard-LED-Control/CustomPanelFIles/LEDControl.xml"
+     status="0" statustext="OK" version="2.0">
+     <params>
+          <param access="1" maxlength="0" name="Color" oid="color"
+               type="STRING" value="" widget="color-picker-popup"/>
+          <param access="1" maxlength="0" name="ColorPicker"
+               oid="colorPicker" type="STRING" value="#0000FF" widget="color-picker-popup"/>
+     </params>
+     <statsmenu menuid="0" name="status"/>
+     <configmenu menuid="1" name="config"/>
+</card>
