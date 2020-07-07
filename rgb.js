@@ -24,11 +24,6 @@ http.listen(8080); //listen to port 8080
 function handler (req, res) { //what to do on requests to port 8080
     //console.log('handler', req.body);
     req.on('data', function (data) {
-        console.log('request data', data.toString())
-				var color = JSON.parse(data.toString());
-        gpiRed.pwmWrite((parseInt(color.red))); //set RED LED to specified value
-        gpiGreen.pwmWrite((parseInt(color.green))); //set GREEN LED to specified value
-        gpiBlue.pwmWrite((parseInt(color.blue))); //set BLUE LED to specified value
 
 				if (data.vegasMode == true){
 					console.log ('yayyy');
@@ -47,6 +42,12 @@ function handler (req, res) { //what to do on requests to port 8080
 						}
 					}, 10)
 				}
+
+				console.log('request data', data.toString())
+				var color = JSON.parse(data.toString());
+				gpiRed.pwmWrite((parseInt(color.red))); //set RED LED to specified value
+				gpiGreen.pwmWrite((parseInt(color.green))); //set GREEN LED to specified value
+				gpiBlue.pwmWrite((parseInt(color.blue))); //set BLUE LED to specified value
 
 		})
     return res.end();
