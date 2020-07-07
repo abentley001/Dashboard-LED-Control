@@ -4,110 +4,42 @@ var io = require('socket.io')(http); //require socket.io module and pass the htt
 var tinycolor = require('tinycolor2');
 
 var Gpio = require('pigpio').Gpio; //include pigpio to interact with the GPIO
-var ledRed = new Gpio(4, {mode: Gpio.OUTPUT}); //use GPIO pin 4 as output for RED
-var ledGreen = new Gpio(5, {mode: Gpio.OUTPUT}); //use GPIO pin 17 as output for GREEN
-var ledBlue = new Gpio(6, {mode: Gpio.OUTPUT}); //use GPIO pin 27 as output for BLUE
+var gpiRed = new Gpio(4, {mode: Gpio.OUTPUT}); //use GPIO pin 4 as output for RED
+var gpiGreen = new Gpio(5, {mode: Gpio.OUTPUT}); //use GPIO pin 17 as output for GREEN
+var gpiBlue = new Gpio(6, {mode: Gpio.OUTPUT}); //use GPIO pin 27 as output for BLUE
 
-var redRGB = 0; //set starting value of RED variable to off (255 for common anode)
-var greenRGB = 0; //set starting value of GREEN variable to off (255 for common anode)
-var blueRGB = 0; //set starting value of BLUE variable to off (255 for common anode)
+var ledColor = tinycolor("rgb 0 0 0");
 
 //RESET RGB LED
-ledRed.digitalWrite(0); // Turn RED LED off
-ledGreen.digitalWrite(0); // Turn GREEN LED off
-ledBlue.digitalWrite(0); // Turn BLUE LED off
+gpiRed.digitalWrite(0); // Turn RED LED off
+gpiGreen.digitalWrite(0); // Turn GREEN LED off
+gpiBlue.digitalWrite(0); // Turn BLUE LED off
+
+setInterval(() => {
+  i++;
+  ledColor.spin(i);
+	gpiRed.digitalWrite(ledColor._r); // Turn RED LED off
+	gpiGreen.digitalWrite(ledColor._g); // Turn GREEN LED off
+	gpiBlue.digitalWrite(ledColor._b);
+  ledColor.spin(-i);
+  if (i > 359){
+    i = 0;
+  }
+}, 20)
+
 
 http.listen(8080); //listen to port 8080
 
-var fadeTime = 500;
 
-//var redTimeout;
-
-function fadeRed (newRed){
-
-	// var speed = (fadeTime / Math.abs(redRGB - newRed))
-	// if (redTimeout){
-	// 	redTimeout = clearTimeout(redTimeout);
-	// }
-	// redTimeout = setTimeout(
-	// 	function (){
-	// 		if (redRGB < newRed){
-	// 			redRGB++;
-	// 			fadeRed(newRed);
-	// 		}
-	// 		if (redRGB > newRed){
-	// 			redRGB--;
-	// 			fadeRed(newRed);
-	// 		}
-	// 	console.log(redRGB);
- 	// 	ledRed.pwmWrite(redRGB);
-	// }, speed)
-}
-
-//var greenTimeout;
-
-function fadeGreen (newGreen){
-
-	// var speed = (fadeTime / Math.abs(greenRGB - newGreen))
-	// if (greenTimeout){
-	// 	greenTimeout = clearTimeout(greenTimeout);
-	// }
-	// greenTimeout = setTimeout(
-	// 	function (){
-	// 		if (greenRGB < newGreen){
-	// 			greenRGB++;
-	// 			fadeGreen(newGreen);
-	// 		}
-	// 		if (greenRGB > newGreen){
-	// 			greenRGB--;
-	// 			fadeGreen(newGreen);
-	// 		}
-	// 	console.log(greenRGB);
- 	// 	ledGreen.pwmWrite(greenRGB);
-	// }, speed)
-}
-
-//var blueTimeout;
-
-function fadeBlue (newBlue){
-
-	// var speed = (fadeTime / Math.abs(blueRGB - newBlue))
-	// if (blueTimeout){
-	// 	blueTimeout = clearTimeout(blueTimeout);
-	// }
-	// blueTimeout = setTimeout(
-	// 	function (){
-	// 		if (blueRGB < newBlue){
-	// 			blueRGB++;
-	// 			fadeBlue(newBlue);
-	// 		}
-	// 		if (blueRGB > newBlue){
-	// 			blueRGB--;
-	// 			fadeBlue(newBlue);
-	// 		}
-	// 	console.log(blueRGB);
- 	// 	ledBlue.pwmWrite(blueRGB);
-	// }, speed)
-}
 function handler (req, res) { //what to do on requests to port 8080
     //console.log('handler', req.body);
     req.on('data', function (data) {
         console.log('request data', data.toString())
 	var color = JSON.parse(data.toString());
-	//fadeRed(parseInt(color.red));
-	//fadeGreen(parseInt(color.green));
-	//fadeBlue(parseInt(color.blue));
         ledRed.pwmWrite((parseInt(color.red))); //set RED LED to specified value
         ledGreen.pwmWrite((parseInt(color.green))); //set GREEN LED to specified value
         ledBlue.pwmWrite((parseInt(color.blue))); //set BLUE LED to specified value
     })
-    fs.readFile(__dirname + '/public/rgb.html', function(err, data) { //read file rgb.html in public folder
-    if (err) {
-      res.writeHead(404, {'Content-Type': 'text/html'}); //display 404 on error
-      return res.end("404 Not Found");
-    }
-    res.writeHead(200, {'Content-Type': 'text/html'}); //write HTML
-    res.write(data); //write data from rgb.html
     return res.end();
   });
 }
@@ -130,8 +62,8 @@ io.sockets.on('connection', function (socket) {// Web Socket Connection
 });
 
 process.on('SIGINT', function () { //on ctrl+c
-  ledRed.digitalWrite(0); // Turn RED LED off
-  ledGreen.digitalWrite(0); // Turn GREEN LED off
-  ledBlue.digitalWrite(0); // Turn BLUE LED off
+  gpiRed.digitalWrite(0); // Turn RED LED off
+  gpiGreen.digitalWrite(0); // Turn GREEN LED off
+  gpiBlue.digitalWrite(0); // Turn BLUE LED off
   process.exit(); //exit completely
 });
