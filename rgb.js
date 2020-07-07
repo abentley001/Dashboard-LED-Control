@@ -25,30 +25,36 @@ http.listen(8080); //listen to port 8080
 function handler (req, res) { //what to do on requests to port 8080
     //console.log('handler', req.body);
     req.on('data', function (json) {
+
 			console.log('request data', json.toString())
+
 			var data = JSON.parse(json.toString());
 
-				if (data.vegasMode == true && !vegasMode) {
-					console.log ('yayyy');
-					vegasMode = setInterval(() => {
-					  i++;
-					  ledColor.spin(i);
-						gpiRed.pwmWrite(Math.round(ledColor._r)); // Turn RED LED off
-						gpiGreen.pwmWrite(Math.round(ledColor._g)); // Turn GREEN LED off
-						gpiBlue.pwmWrite(Math.round(ledColor._b));
-					  ledColor.spin(-i);
-					  if (i > 359){
-					    i = 0;
-					  }
-					}, 10);
-				} else {
-					gpiRed.pwmWrite((parseInt(data.red))); //set RED LED to specified value
-					gpiGreen.pwmWrite((parseInt(data.green))); //set GREEN LED to specified value
-					gpiBlue.pwmWrite((parseInt(data.blue))); //set BLUE LED to specified value
-					if (data.vegasMode == false){
-						vegasMode = clearInterval(vegasMode)
-					}
-				}
+			if (data.vegasMode == false && vegasMode){
+				vegasMode = clearInterval(vegasMode)
+			}
+
+			if (data.vegasMode == true && !vegasMode) {
+				console.log ('yayyy');
+				vegasMode = setInterval(() => {
+				  i++;
+				  ledColor.spin(i);
+					gpiRed.pwmWrite(Math.round(ledColor._r));
+					gpiGreen.pwmWrite(Math.round(ledColor._g));
+					gpiBlue.pwmWrite(Math.round(ledColor._b));
+				  ledColor.spin(-i);
+				  if (i > 359){
+				    i = 0;
+				  }
+				}, 10);
+			}
+
+			if ('red' in data) {
+				gpiRed.pwmWrite((parseInt(data.red)));
+				gpiGreen.pwmWrite((parseInt(data.green)));
+				gpiBlue.pwmWrite((parseInt(data.blue)));
+
+			}
 
 
 
