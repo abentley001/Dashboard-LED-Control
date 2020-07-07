@@ -8,7 +8,7 @@
           <param access="1" maxlength="0" name="Color" oid="color"
                type="STRING" value="" widget="color-picker-popup"/>
           <param access="1" maxlength="0" name="ColorPicker"
-               oid="colorPicker" type="STRING" value="#0000FF" widget="color-picker-popup"/>
+               oid="colorPicker" type="STRING" value="#00FF00" widget="color-picker-popup"/>
      </params>
      <statsmenu menuid="0" name="status"/>
      <configmenu menuid="1" name="config"/>

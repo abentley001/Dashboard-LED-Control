@@ -30,9 +30,9 @@ function handler (req, res) { //what to do on requests to port 8080
         gpiGreen.pwmWrite((parseInt(color.green))); //set GREEN LED to specified value
         gpiBlue.pwmWrite((parseInt(color.blue))); //set BLUE LED to specified value
 
-				clearInterval(vegasMode);
 
-				if (data.mode == 'vegas'){
+
+				if (data.vegasMode == true){
 					let vegasMode = setInterval(() => {
 					  i++;
 					  ledColor.spin(i);
@@ -43,6 +43,9 @@ function handler (req, res) { //what to do on requests to port 8080
 					  if (i > 359){
 					    i = 0;
 					  }
+						if (data.vegasMode == false){
+							clearInterval(vegasMode);
+						}
 					}, 10)
 				}
 
