@@ -7,6 +7,7 @@ var Gpio = require('pigpio').Gpio; //include pigpio to interact with the GPIO
 var gpiRed = new Gpio(4, {mode: Gpio.OUTPUT}); //use GPIO pin 4 as output for RED
 var gpiGreen = new Gpio(5, {mode: Gpio.OUTPUT}); //use GPIO pin 17 as output for GREEN
 var gpiBlue = new Gpio(6, {mode: Gpio.OUTPUT}); //use GPIO pin 27 as output for BLUE
+var vegasMode;
 
 var ledColor = tinycolor("hsv 0 100 100");
 var i = 0;
@@ -26,9 +27,10 @@ function handler (req, res) { //what to do on requests to port 8080
     req.on('data', function (json) {
 			console.log('request data', json.toString())
 			var data = JSON.parse(json.toString());
-				if (data.vegasMode == true){
+
+				if (data.vegasMode == true && !vegasMode) {
 					console.log ('yayyy');
-					let vegasMode = setInterval(() => {
+					vegasMode = setInterval(() => {
 					  i++;
 					  ledColor.spin(i);
 						gpiRed.pwmWrite(Math.round(ledColor._r)); // Turn RED LED off
@@ -38,12 +40,12 @@ function handler (req, res) { //what to do on requests to port 8080
 					  if (i > 359){
 					    i = 0;
 					  }
-						if (data.vegasMode == false){
-							clearInterval(vegasMode);
-						}
-					}, 10)
+					}, 10);
 				}
 
+				if (data.vegasMode == false){
+					vegasMode = clearInterval(vegasMode)
+				}
 
 				gpiRed.pwmWrite((parseInt(data.red))); //set RED LED to specified value
 				gpiGreen.pwmWrite((parseInt(data.green))); //set GREEN LED to specified value
