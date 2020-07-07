@@ -9,7 +9,7 @@ var gpiGreen = new Gpio(5, {mode: Gpio.OUTPUT}); //use GPIO pin 17 as output for
 var gpiBlue = new Gpio(6, {mode: Gpio.OUTPUT}); //use GPIO pin 27 as output for BLUE
 
 var ledColor = tinycolor("rgb 0 0 0");
-
+var i = 0;
 //RESET RGB LED
 gpiRed.digitalWrite(0); // Turn RED LED off
 gpiGreen.digitalWrite(0); // Turn GREEN LED off
