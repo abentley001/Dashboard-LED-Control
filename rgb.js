@@ -42,7 +42,6 @@ function handler (req, res) { //what to do on requests to port 8080
     })
     return res.end();
   }
-}
 
 io.sockets.on('connection', function (socket) {// Web Socket Connection
   socket.on('rgbLed', function(data) { //get light switch status from client
