@@ -18,9 +18,9 @@ gpiBlue.digitalWrite(0); // Turn BLUE LED off
 setInterval(() => {
   i++;
   ledColor.spin(i);
-	gpiRed.digitalWrite(ledColor._r); // Turn RED LED off
-	gpiGreen.digitalWrite(ledColor._g); // Turn GREEN LED off
-	gpiBlue.digitalWrite(ledColor._b);
+	gpiRed.pwmWrite(ledColor._r); // Turn RED LED off
+	gpiGreen.pwmWrite(ledColor._g); // Turn GREEN LED off
+	gpiBlue.pwmWrite(ledColor._b);
   ledColor.spin(-i);
   if (i > 359){
     i = 0;
@@ -36,9 +36,9 @@ function handler (req, res) { //what to do on requests to port 8080
     req.on('data', function (data) {
         console.log('request data', data.toString())
 	var color = JSON.parse(data.toString());
-        ledRed.pwmWrite((parseInt(color.red))); //set RED LED to specified value
-        ledGreen.pwmWrite((parseInt(color.green))); //set GREEN LED to specified value
-        ledBlue.pwmWrite((parseInt(color.blue))); //set BLUE LED to specified value
+        gpiRed.pwmWrite((parseInt(color.red))); //set RED LED to specified value
+        gpiGreen.pwmWrite((parseInt(color.green))); //set GREEN LED to specified value
+        gpiBlue.pwmWrite((parseInt(color.blue))); //set BLUE LED to specified value
     })
     return res.end();
   }
@@ -54,9 +54,9 @@ io.sockets.on('connection', function (socket) {// Web Socket Connection
 
     console.log("rbg: " + redRGB + ", " + greenRGB + ", " + blueRGB); //output converted to console
 
-    ledRed.pwmWrite(redRGB); //set RED LED to specified value
-    ledGreen.pwmWrite(greenRGB); //set GREEN LED to specified value
-    ledBlue.pwmWrite(blueRGB); //set BLUE LED to specified value
+    gpiRed.pwmWrite(redRGB); //set RED LED to specified value
+    gpiGreen.pwmWrite(greenRGB); //set GREEN LED to specified value
+    gpiBlue.pwmWrite(blueRGB); //set BLUE LED to specified value
   });
 });
 
