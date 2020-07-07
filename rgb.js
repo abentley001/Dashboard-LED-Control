@@ -41,15 +41,17 @@ function handler (req, res) { //what to do on requests to port 8080
 					    i = 0;
 					  }
 					}, 10);
+				} else {
+					gpiRed.pwmWrite((parseInt(data.red))); //set RED LED to specified value
+					gpiGreen.pwmWrite((parseInt(data.green))); //set GREEN LED to specified value
+					gpiBlue.pwmWrite((parseInt(data.blue))); //set BLUE LED to specified value
+					if (data.vegasMode == false){
+						vegasMode = clearInterval(vegasMode)
+					}
 				}
 
-				if (data.vegasMode == false){
-					vegasMode = clearInterval(vegasMode)
-				}
 
-				gpiRed.pwmWrite((parseInt(data.red))); //set RED LED to specified value
-				gpiGreen.pwmWrite((parseInt(data.green))); //set GREEN LED to specified value
-				gpiBlue.pwmWrite((parseInt(data.blue))); //set BLUE LED to specified value
+
 
 		})
     return res.end();
