@@ -18,13 +18,12 @@ gpiBlue.digitalWrite(0); // Turn BLUE LED off
 setInterval(() => {
   i++;
   ledColor.spin(i);
-	//gpiRed.pwmWrite(ledColor._r); // Turn RED LED off
-	//gpiGreen.pwmWrite(ledColor._g); // Turn GREEN LED off
-	//gpiBlue.pwmWrite(ledColor._b);
+	gpiRed.pwmWrite(Math.round(ledColor._r)); // Turn RED LED off
+	gpiGreen.pwmWrite(Math.round(ledColor._g)); // Turn GREEN LED off
+	gpiBlue.pwmWrite(Math.round(ledColor._b));
 	console.log(ledColor._r); // Turn RED LED off
 	console.log(ledColor._g); // Turn GREEN LED off
 	console.log(ledColor._b);
-	console.log(typeof ledColor._b);
   ledColor.spin(-i);
   if (i > 359){
     i = 0;
