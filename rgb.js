@@ -41,7 +41,7 @@ function handler (req, res) { //what to do on requests to port 8080
         ledBlue.pwmWrite((parseInt(color.blue))); //set BLUE LED to specified value
     })
     return res.end();
-  });
+  }
 }
 
 io.sockets.on('connection', function (socket) {// Web Socket Connection
