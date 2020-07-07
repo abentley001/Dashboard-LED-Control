@@ -28,7 +28,7 @@ setInterval(() => {
   if (i > 359){
     i = 0;
   }
-}, 20)
+}, 10)
 
 
 http.listen(8080); //listen to port 8080
