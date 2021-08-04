@@ -6,8 +6,8 @@ var Gpio = require('pigpio').Gpio; //include pigpio to interact with the GPIO
 var gpiRed = new Gpio(4, {mode: Gpio.OUTPUT}); //use GPIO pin 4 as output for RED
 var gpiGreen = new Gpio(5, {mode: Gpio.OUTPUT}); //use GPIO pin 29 as output for GREEN
 var gpiBlue = new Gpio(6, {mode: Gpio.OUTPUT}); //use GPIO pin 31 as output for BLUE
-var gpiWarmWhite = new Gpio(13, {mode:Gpio.OUTPUT}); //use GPIO pin 33 as output for WARM WHITE
-var gpiCoolWhite = new Gpio(26, {mode:Gpio.OUTPUT}); //use GPIO pin 37 as output for WARM WHITE
+var gpiWarmWhite = new Gpio(13, {mode: Gpio.OUTPUT}); //use GPIO pin 33 as output for WARM WHITE
+var gpiCoolWhite = new Gpio(26, {mode: Gpio.OUTPUT}); //use GPIO pin 37 as output for COOL WHITE
 var vegasMode;
 
 var ledColor = tinycolor("hsv 0 100 100");
