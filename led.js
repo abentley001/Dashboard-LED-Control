@@ -56,6 +56,9 @@ function handler (req, res) { //what to do on requests to port 8080
 				gpiRed.pwmWrite((parseInt(data.red)));
 				gpiGreen.pwmWrite((parseInt(data.green)));
 				gpiBlue.pwmWrite((parseInt(data.blue)));
+			}
+
+			if ('warmWhite' in data) {
 				gpiWarmWhite.pwmWrite((parseInt(data.warmWhite)));
 				gpiCoolWhite.pwmWrite((parseInt(data.coolWhite)));
 			}
