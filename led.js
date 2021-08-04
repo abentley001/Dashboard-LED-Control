@@ -6,8 +6,8 @@ var Gpio = require('pigpio').Gpio; //include pigpio to interact with the GPIO
 var gpiRed = new Gpio(4, {mode: Gpio.OUTPUT}); //use GPIO pin 4 as output for RED
 var gpiGreen = new Gpio(5, {mode: Gpio.OUTPUT}); //use GPIO pin 29 as output for GREEN
 var gpiBlue = new Gpio(6, {mode: Gpio.OUTPUT}); //use GPIO pin 31 as output for BLUE
-//var gpiWarmWhite = new Gpio(13, {mode: Gpio.OUTPUT}); //use GPIO pin 33 as output for WARM WHITE
-//var gpiCoolWhite = new Gpio(26, {mode: Gpio.OUTPUT}); //use GPIO pin 37 as output for COOL WHITE
+var gpiWarmWhite = new Gpio(13, {mode: Gpio.OUTPUT}); //use GPIO pin 33 as output for WARM WHITE
+var gpiCoolWhite = new Gpio(26, {mode: Gpio.OUTPUT}); //use GPIO pin 37 as output for COOL WHITE
 var vegasMode;
 
 var ledColor = tinycolor("hsv 0 100 100");
@@ -16,8 +16,8 @@ var i = 0;
 gpiRed.digitalWrite(0); // Turn RED LED off
 gpiGreen.digitalWrite(0); // Turn GREEN LED off
 gpiBlue.digitalWrite(0); // Turn BLUE LED off
-//gpiWarmWhite.digitalWrite(0); // Turn WARM WHITE LED off
-//gpiCoolWhite.digitalWrite(0); // Turn COOL WHITE LED off
+gpiWarmWhite.digitalWrite(0); // Turn WARM WHITE LED off
+gpiCoolWhite.digitalWrite(0); // Turn COOL WHITE LED off
 
 
 
@@ -56,8 +56,8 @@ function handler (req, res) { //what to do on requests to port 8080
 				gpiRed.pwmWrite((parseInt(data.red)));
 				gpiGreen.pwmWrite((parseInt(data.green)));
 				gpiBlue.pwmWrite((parseInt(data.blue)));
-				//gpiWarmWhite.pwmWrite((parseInt(data.warmWhite)));
-				//gpiCoolWhite.pwmWrite((parseInt(data.coolWhite)));
+				gpiWarmWhite.pwmWrite((parseInt(data.warmWhite)));
+				gpiCoolWhite.pwmWrite((parseInt(data.coolWhite)));
 			}
 
 
@@ -71,7 +71,7 @@ process.on('SIGINT', function () { //on ctrl+c
   gpiRed.digitalWrite(0); // Turn RED LED off
   gpiGreen.digitalWrite(0); // Turn GREEN LED off
   gpiBlue.digitalWrite(0); // Turn BLUE LED off
-  //gpiWarmWhite.digitalWrite(0); // Turn WARM WHITE LED off
-  //gpiCoolWhite.digitalWrite(0); // Turn COOL WHITE LED off
+  gpiWarmWhite.digitalWrite(0); // Turn WARM WHITE LED off
+  gpiCoolWhite.digitalWrite(0); // Turn COOL WHITE LED off
   process.exit(); //exit completely
 });
