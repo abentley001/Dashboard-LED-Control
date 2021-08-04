@@ -8,7 +8,10 @@
           <param access="1" maxlength="0" name="Color" oid="color"
                type="STRING" value="" widget="color-picker-popup"/>
           <param access="1" maxlength="0" name="ColorPicker"
-               oid="colorPicker" type="STRING" value="#00FF00" widget="color-picker-popup"/>
+               oid="colorPicker" type="STRING" value="#0000FF" widget="color-picker-popup"/>
+          <param access="1" constraint="0.0;255.0;0.0;255.0;1"
+               constrainttype="INT_STEP_RANGE" name="Red" oid="red"
+               precision="0" strvalue="0" type="INT16" value="0" widget="slider-vertical"/>
      </params>
      <statsmenu menuid="0" name="status"/>
      <configmenu menuid="1" name="config"/>

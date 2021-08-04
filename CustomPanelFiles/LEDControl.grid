@@ -15,14 +15,15 @@ params.setValue('color', 0, params.getValue('colorPicker', 0));
       <style/>
       <api>var group1Enabled = false;</api>
    </meta>
-   <param expand="true" height="138" left="122" oid="colorPicker" showlabel="false" top="260" width="357">
+   <param expand="true" height="216" left="5" oid="colorPicker" showlabel="false" top="182" widget="color-picker" width="562">
       <task tasktype="ogscript"/>
       <task tasktype="ogscript">function hexToRgb(hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
   return result ? {
     red: parseInt(result[1], 16),
     green: parseInt(result[2], 16),
-    blue: parseInt(result[3], 16)
+    blue: parseInt(result[3], 16),
+    vegasMode: false
   } : null;
 }
 
@@ -74,4 +75,11 @@ params.setValue('colorPicker', 0, "#0000FF");
 
 ogscript.debug(group1Enabled);</task>
    </button>
+<button buttontype="push" height="75" id="vegasMode" left="253" name="Vegas Mode" top="528" width="98">
+      <task tasktype="ogscript">ogscript.asyncPost("http://192.168.86.21:8080",JSON.stringify({
+    vegasMode: true
+  }), null);</task>
+   </button>
+   <param expand="true" height="231" left="744" oid="colorPicker" showlabel="false" top="208" width="91"/>
+   <param expand="true" height="226" left="932" oid="red" showlabel="false" style="bg#570E0E;" top="218" widget="slider-vertical-nolabel" width="71"/>
 </abs>

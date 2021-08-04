@@ -1,1 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><abs contexttype="opengear" gridaspect="false" gridheight="203" gridwidth="1304" keepalive="false" touch="true" virtualheight="203" virtualwidth="1304"/>
+<?xml version="1.0" encoding="UTF-8"?><abs contexttype="opengear" gridaspect="false" gridheight="203" gridsize="20" gridwidth="1304" keepalive="false" touch="true" virtualheight="203" virtualwidth="1304">
+   <meta>
+      <params>
+         <param access="1" maxlength="0" name="Color" oid="color" type="STRING" value="#000000" widget="color-picker"/>
+         <param access="1" constraint="0.0;255.0;0.0;255.0;1" constrainttype="INT_STEP_RANGE" name="Red" oid="red" precision="0" type="INT16" value="255" widget="slider-vertical-nolabel"/>
+      </params>
+   </meta>
+   
+<param expand="true" height="200" left="100" oid="red" showlabel="false" style="look:normal;" top="0" width="80"/>
+</abs>
